@@ -1,0 +1,252 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Datos de Cliente</title>
+<style type="text/css" media="screen">
+
+#button{
+  background-color: red;
+  width: 40%;
+  height: 33px;
+  border-radius: 8px;
+  color:white;
+  text-align: center;
+  border-style:none;
+  cursor: pointer;
+}  
+.anuncio{
+	background-color: white;
+	width: 100%;
+	height: 45px;
+	box-shadow: 2px 2px 2px #e0e0e0; 
+opacity: 0.5;
+}
+</style>
+<script language="javascript">
+   function xAgrega(xControl, iPos, sTxt, sVal){
+     var selOpcion=new Option(sTxt, sVal);
+     eval(xControl.options[iPos]=selOpcion);
+   }
+   function cambia(xControl){
+    while (xControl.length) xControl.remove(0);
+    switch (document.form1.cboCategoria.selectedIndex){
+     case 0:
+          xAgrega(xControl,  0, "----------Seleccione----------", "----------Seleccione----------");
+          break;
+     case 1:
+     	  xAgrega(xControl,  0, "----------Seleccione----------", "----------Seleccione----------");
+	  xAgrega(xControl,  1, "Monitor", "Monitor");
+	  xAgrega(xControl,  2, "NoteBook", "NoteBook");
+	  xAgrega(xControl,  3, "Impresoras", "Impresoras");
+	  break;
+     case 2:
+     	  xAgrega(xControl,  0, "----------Seleccione----------", "0");
+	  xAgrega(xControl,  1, "Refrigeradora", "Refrigeradora");
+	  xAgrega(xControl,  2, "Lavadora", "Lavadora");
+	  xAgrega(xControl,  3, "Microondas", "Microondas");
+          break;
+     case 3:
+     	  xAgrega(xControl,  0, "----------Seleccione----------", "----------Seleccione----------");
+	  xAgrega(xControl,  1, "TV", "TV");
+	  xAgrega(xControl,  2, "DVD", "DVD");
+	  xAgrega(xControl,  3, "Equipo de Sonido", "Equipo de Sonido");
+	  break;
+
+    }//fin switch
+   } //fin de la funcion cambia()
+
+</script>
+<script language="javascript">
+  function validarcampos(){
+     if (document.form1.TxtApellidos.value==""){
+         alert("Debe ingresar los Apellidos y Nombres!");
+         return false;
+     }
+     if (document.form1.txtDNI.value==""){
+         alert("Debe ingresar el DNI!");
+         return false;
+     }
+     if (document.form1.txtDNI.value.length != 8){
+         alert("Error en el DNI!");
+         document.form1.txtDNI.select();
+         document.form1.txtDNI.focus();
+         return false;
+     }
+     if(document.form1.cboCategoria.selectedIndex==0){
+         alert("Debe seleccionar una Categoria\nProceda a seleccionar");
+         return false;
+     }
+     if(document.form1.cboProducto.selectedIndex==0){
+       alert("Debe seleccionar un Producto\nProceda a seleccionar");
+       return false;
+     }
+
+     
+
+   alert("Datos Ingresados Correctamente!!!\nGracias " +document.form1.TxtApellidos.value + "\n por su preferencia");
+   return true;
+
+    }
+function generarCronograma(){
+
+
+var cli=document.form1.TxtApellidos.value;
+var c=form1.TxtCuotas.value;
+var monto=form1.TxtCosto.value;
+var mc=form1.TxtCosto.value / form1.TxtCuotas.value; 
+//let num = 21.777777;
+//document.write(mc.toFixed(1));
+let respuesta = (mc+ ((mc*c)/100));
+let inter = ((mc*c)/100);
+let consultar =mc;
+document.write('<center><h2 style="background-color: #dc000d;margin: 0;padding: 0;width: 100%;color: snow;height: 55px"><img src=https://files.merca20.com/uploads/2019/05/scotiabank-ahora.jpg width=55px height=38px> Banco Scotiabank </h2> <br>');
+document.write("<p style='color:blue;'>Cronograma de Pagos</p><br>");
+document.write("Datos del Cliente..: " + cli + "<br>" );
+document.write("<table border=1 style='color: snow width: 513px;width: 634px; text-align:center;' > <tr><td>Nro</td> <td> Monto de Cuota </td> <td> interes </td> <td> Monto a Pagar</td></tr>" );
+for (i=1; i<=c; i++){
+document.write("<tr><td>"+ i + "</td> <td>" + (consultar.toFixed(2)) + "</td> <td>" + (inter.toFixed(2)) + "</td><td> " + (respuesta.toFixed(2)) + "</td> </tr>" );
+};
+document.write("</table><br>");
+document.write('<A onclick="imprimir()"; style="background-color:red; width:23px ;height: 23px; margin: 12px;  border-radius: 10px; padding: 7px;  color: white; text-decoration: none; cursor:pointer;"> Imprimir Cronograma </a> '); 
+document.write('<A onclick="inicio()"; style="background-color:#f3f2f2; cursor:pointer; text-decoration:none;width:23px ;height: 23px; margin: 12px;  border-radius: 10px; padding: 7px; box-shadow: 2px 2px 2px #b1b1b1ba;  ">Volver a Formulario de Créditos'); 
+
+document.write("<br>");
+}
+
+  </script>
+</script>
+<script type="text/javascript">
+ function validar(e) { 
+    tecla = (document.all) ? e.keyCode : e.which;   
+    if (tecla==8) return true;        //Tecla de retroceso (para poder borrar) 
+    if (tecla==32) return true;      //32 codigo ascii del espacio (para poder dejar blancos entre apellido y nombre) 
+
+    //dejar la línea de patron que se necesite y borrar el resto 
+    patron =/[A-Za-z]/;                         // Solo acepta letras 
+    te = String.fromCharCode(tecla);
+    return patron.test(te);
+}
+</script>
+<script>
+  function imprimir(){
+   window.print();
+
+  }
+  function inicio(){
+//Proforma_Terminada_JDiaz.html
+  window.location.assign("./Proforma_Terminada_JDiaz.html");
+  }
+</script>
+</head>
+<body style="background-color: white" >
+
+	<marquee class="anuncio">SISTEMA CREADO POR REYNALDO MARTIN CURO NAJARRO Y ANNSHELLY HUAMAN HUACHACA</marquee>
+<!--     <form id="form1" name="form1" method="post" action="" onsubmit="return validarcampos(form1); generarCronograma(); ">   -->
+<form id="form1" name="form1" method="post" action="" > 
+  <table width="582" border="0" align="center" class="tabla-color">
+    <tr>
+      <td colspan="2"> <div align="center" style="color:red;"> Datos de Cliente</div></td>
+    </tr>
+    <tr>
+      <td width="236">Apellidos y Nombres</td>
+      <td width="336">
+        <label>
+        <input name="TxtApellidos" type="text" id="TxtApellidos" size="50" onkeypress="return validar(event)" />
+        </label>
+</td>
+    </tr>
+    <tr>
+      <td>Ingreso Mensual Promedio</td>
+      <td>
+        <label>
+        <input name="TxtIngMensual" type="text" id="TxtIngMensual" size="20" onkeypress="if((event.keyCode < 48 || event.keyCode>57) && (event.keyCode !=44)) event.returnValue=false;"/>
+        </label>
+</td>
+    </tr>
+    <tr>
+      <td>D.N.I.</td>
+      <td>
+        <label>
+
+        <input name="txtDNI" type="text" id="txtDNI" size="20" maxlength="8" onkeypress="if(event.keyCode < 48 || event.keyCode>57) event.returnValue=false;"/>
+        </label>
+   </td>
+    </tr>
+    <tr>
+      <td colspan="2"><div align="center">Datos de Producto</div></td>
+    </tr>
+    <tr>
+      <td>Categoria</td>
+      <td>
+        <label>
+        <select name="cboCategoria" id="cboCategoria" onchange="cambia(document.form1.cboProducto)">
+          <option selected="selected">-----(Seleccione)-----</option>
+          <option>Productos Informáticos</option>
+          <option>Linea Blanca</option>
+          <option>TV/Audio y Video</option>
+        </select>
+        </label>
+     </td>
+    </tr>
+    <tr>
+      <td>
+        <label>Producto</label>
+     </td>
+      <td>
+        
+        <label>
+        <select name="cboProducto" id="cboProducto">
+          <option selected="selected">-----(Seleccione)-----</option>
+        </select>
+        </label>
+     </td>
+    </tr>
+    <tr>
+      <td><div align="center">Costo Producto
+        <input name="TxtCosto" type="text" id="TxtCosto" size="10"  onkeypress="if(event.keyCode < 48 || event.keyCode>57) event.returnValue=false;"/>
+      </div></td>
+      <td><div align="center">Nº Serie
+        <input name="TxtSerie" type="text" id="TxtSerie" size="10" />
+</div></td>
+    </tr>
+    <tr>
+      <td><div align="center">
+
+    Nro Cuotas
+       <input name="TxtCuotas" type="text" id="TxtCuotas" size="10"  onkeypress="if(event.keyCode < 48 || event.keyCode>57) event.returnValue=false;"/> 
+
+</div></td>
+      <td><div align="center">Cuota Inicial
+        <input name="TxtInicial" type="text" id="TxtInicial" size="10" onkeypress="if(event.keyCode < 48 || event.keyCode>57) event.returnValue=false;" />
+</div></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div align="center">
+          <input type="button" name="button" id="button" value="Generar Proforma" onclick="validarcampos(); generarCronograma(); " />
+        </div>
+      </td>
+    </tr>
+  </table>
+</form>
+<div style="height: 205px; width: 100%;" >
+  
+</div>
+<img src="https://www.ideariumcreacion.com/img_secciones/banner_128.gif" alt="" style="width: 100%; height: 100px;">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
